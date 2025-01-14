@@ -1,9 +1,12 @@
-from os_defaults import OS_NAMES
-from browser_path import BROWSER_PATH
-from webdriver_defaults import WEBDRIVER_DEFAULTS
-from browser_version import BROWSER_VERSION
+from maps.os_defaults import OS_NAMES
+from maps.browser_path import BROWSER_PATH
+from maps.webdriver_defaults import WEBDRIVER_DEFAULTS
+from maps.browser_version import BROWSER_VERSION
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 import sys
 import subprocess
+import time
 
 def detect_os():
     host_os = OS_NAMES[sys.platform]
@@ -51,7 +54,7 @@ def get_browser_version(os_type, browser):
 def setup_webdriver(host_os, browser, get_bin,width,height):
     # To do: check and enable remote automation for safari on macOS
     options = WEBDRIVER_DEFAULTS[browser]['options']()
-    options.add_argument("--headless")
+    options.add_argument("--headless=new")
     options.add_argument("--disable-gpu")
     options.add_argument(f"--window-size={width},{height}")
     options.add_argument("--hide-scrollbars")
@@ -67,3 +70,12 @@ def setup_webdriver(host_os, browser, get_bin,width,height):
         print("Browser bin path not specified")
         browser_path = None  # or some default path
     return WEBDRIVER_DEFAULTS[browser]['driver'](options=options)
+    
+def bypass_cookie_popup(driver):
+    try:
+        # Locate the "Agree and proceed" button
+        agree_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Agree and proceed')]")
+        agree_button.click()
+        print("Cookie consent popup bypassed.")
+    except NoSuchElementException:
+        print("No cookie consent popup found.")

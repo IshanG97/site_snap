@@ -3,7 +3,6 @@ import argparse
 DEFAULT_ARG = {
     '--browser': 'chrome',
     '--url': 'https://www.gsmarena.com/oneplus_13r-13548.php',  # Fixed URL format
-    '--output_path': 'screenshots.png',
     '--format': 'png',
     '--width': 1920,
     '--height': 1080,
@@ -17,7 +16,6 @@ def parse_arguments():
     # Add arguments with short options
     parser.add_argument('-b', '--browser', default=DEFAULT_ARG['--browser'], help='Target browser name, default: %(default)s')
     parser.add_argument('-u', '--url', default=DEFAULT_ARG['--url'], help='URL of the website being screenshot, default: %(default)s')
-    parser.add_argument('-o', '--output_path', default=DEFAULT_ARG['--output_path'], help='Path to save the screenshot, default: %(default)s')
     parser.add_argument('-f', '--format', default=DEFAULT_ARG['--format'], help='Format to save the screenshot (png, jpg, or pdf), default: %(default)s')
     parser.add_argument('-w', '--width', type=int, default=DEFAULT_ARG['--width'], help='Width of the viewport, default: %(default)s')
     parser.add_argument('-ht', '--height', type=int, default=DEFAULT_ARG['--height'], help='Height of the viewport, default: %(default)s')
