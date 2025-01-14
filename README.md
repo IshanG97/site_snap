@@ -1,5 +1,4 @@
-# site_snap
-SiteSnap - takes screenshots of websites
+# SiteSnap - takes screenshots of websites
 
 Usage:
 1. `pip install -r requirements.txt`
